@@ -58,6 +58,6 @@ func getCardValues(val int) (face string, value, alternateValue int) {
 	case ACE:
 		return "A", 11, 1
 	}
-	f := strconv.Itoa(val + 2)
-	return f, val + 2, val + 2
+
+	return strconv.Itoa(val + 2), val + 2, val + 2
 }
