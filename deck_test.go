@@ -42,16 +42,25 @@ func TestShuffle(t *testing.T) {
 
 }
 
-//Test for deck size after multiple draws
+ //TestDraw verifies the following:
+ //1. Deck size should reduce after drawing a card
+ //2. Drawn card should not exist in the deck
 func TestDraw(t *testing.T) {
+  card := Card{}
   deck := deck
   deck = CreateNewDeck()
   initialSizeOfDeck := len(deck)
-  _, deck = deck.Draw()
+  card, deck = deck.Draw()
   newSizeOfDeck := len(deck)
   expectednewSize := initialSizeOfDeck - 1
   if newSizeOfDeck != expectednewSize {
     t.Errorf("Expected deck is %d, found %d", expectednewSize, newSizeOfDeck)
+  }
+
+  for r := range deck {
+    if deck[r] == card {
+      t.Errorf("Card %v should not exists in the deck", card)
+    }
   }
 
 }
