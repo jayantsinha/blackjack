@@ -7,10 +7,14 @@ func TestNewCard(t *testing.T) {
   card = NewCard(SUIT_HEARTS, ACE)
   aceCard := Card{
     suit: SUIT_HEARTS,
+    face: "A",
     value: 11,
     alternateValue: 1,
   }
 
+  if card.face != aceCard.face {
+    t.Errorf("Card value should be %d, found %d", aceCard.face, card.face)
+  }
   if card.value != aceCard.value {
     t.Errorf("Card value should be %d, found %d", aceCard.value, card.value)
   }
