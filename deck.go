@@ -21,6 +21,7 @@ func createSuit(suit string, deck Deck) Deck {
   for i := 0; i < CARDS_IN_SUIT; i++ {
     deck = append(deck, NewCard(suit, i))
   }
+  return deck
 }
 
 //Knuth or Fisher-Yates shuffle
@@ -29,7 +30,7 @@ func (deck Deck) Shuffle() Deck {
     j := rand.Intn(i + 1)
     deck[i], deck[j] = deck[j], deck[i]
   }
-  return
+  return deck
 }
 
 //Draw a card from the Deck

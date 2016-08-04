@@ -2,7 +2,7 @@ package main
 
 //Faces
 const (
-  TWO = iota
+  TWO int = iota
   THREE
   FOUR
   FIVE
@@ -32,19 +32,19 @@ type Card struct {
 }
 
 //Returns a new new card
-func NewCard(suit string, value int) Card {
-  val, altVal := getCardValues(value)
+func NewCard(s string, val int) Card {
+  v, altVal := getCardValues(val)
   card := Card {
-    suit = suit,
-    value = val,
-    alternateValue = altVal,
+    suit:s,
+    value:v,
+    alternateValue:altVal,
   }
   return card
 }
 
 //Get card values
 func getCardValues(val int) (value, alternateValue int) {
-  switch {
+  switch val {
   case JACK, QUEEN, KING:
     return 10, 10
   case ACE:

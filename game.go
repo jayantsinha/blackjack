@@ -2,11 +2,8 @@ package main
 
 //Configs
 const (
-  MAX_SUITS_IN_DECK = 4
   CARDS_IN_SUIT = 13
 )
-
-
 
 //Game Result Constants
 const(
@@ -15,7 +12,6 @@ const(
   GAME_BLACKJACK
   GAME_BUST
 )
-
 
 //Game consists of Player, Dealer and Deck
 type Game struct {
