@@ -37,3 +37,13 @@ func (deck Deck) Shuffle() Deck {
 func (deck Deck) Draw() (Card, Deck) {
 	return deck[0], deck[1:len(deck)]
 }
+
+func (deck Deck) HasMoreCards() bool {
+	ret := false
+	if len(deck) != 0 {
+		ret = true
+	} else {
+		ret = false
+	}
+	return ret
+}

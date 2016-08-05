@@ -64,3 +64,17 @@ func TestDraw(t *testing.T) {
 	}
 
 }
+
+func TestHasMoreCards(t *testing.T) {
+	var card Card
+	_ = card
+	deck := deck
+	deck = CreateNewDeck()
+	for i := 0; i < 52; i++ {
+		card, deck = deck.Draw()
+	}
+	deckHasMoreCards := deck.HasMoreCards()
+	if deckHasMoreCards {
+		t.Errorf("Expected deck to be empty found %d cards. Res=%v", len(deck), deckHasMoreCards)
+	}
+}
