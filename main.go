@@ -1,23 +1,22 @@
 package main
 
 import (
-  "fmt"
-  "bufio"
-  "os"
+	"bufio"
+	"fmt"
+	"os"
 )
 
-func init() {
-
-}
 
 func main() {
-  reader := bufio.NewReader(os.Stdin)
-  fmt.Print("Press G and enter to Start: ")
-  text, _ := reader.ReadString('\n')
-  if(text == "G" || text == "g") {
-    //Start the GAME
-  
+	reader := bufio.NewScanner(os.Stdin)
+	fmt.Print("Press enter to Start: ")
+	reader.Scan()
+	text := reader.Text()
+	if text == "" {
+    //todo: start round until either player quits or len(deck)==0
 
-
-  }
+	}
+	if err := reader.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "reading standard input:", err)
+	}
 }
