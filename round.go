@@ -2,8 +2,9 @@ package main
 
 //Configs
 const (
-	CARDS_IN_SUIT        = 13
-	BUST                 = 21
+	CARDS_IN_SUIT = 13
+	BUST          = 22
+	BLACKJACK     = 21
 )
 
 //Game Result Constants
@@ -24,35 +25,55 @@ type Human Player
 type Dealer Player
 
 type Round struct {
-  num int
-  deck Deck
-  player Human
-  dealer Dealer
-  outcome string
+	num     int
+	deck    Deck
+	player  Human
+	dealer  Dealer
+	outcome string
 }
 
-func NewGame() Game {
-  game := Game{}
-  d := CreateNewDeck()
-  d = d.Shuffle()
-	game.deck = d
-	game.player = Human{
-		hand:       Hand{},
-		playerName: "Player",
-	}
-
-	game.dealer = Dealer{
-		hand:       Hand{},
-		playerName: "Dealer",
-	}
-
-  //deal 2 cards to both player and dealer
-
-
-	return game
-
+func (human *Human) DealCard(card Card) {
+	p := *human
+	p.hand.AddCard(&card)
 }
 
-func DealCard(player Player, deck Deck) Player {
-  card, deck =
+func (dealer *Dealer) DealCard(card Card) {
+	p := *dealer
+	p.hand.AddCard(&card)
+}
+
+//Called when player opts to Stand
+func (round Round) DealersTurn() Round {
+	dealer := round.dealer
+	player := round.player
+	card := Card{}
+	dealerHandVal := dealer.hand.FavourableValue()
+	playerHandVal := player.hand.FavourableValue()
+	//Check Natural
+	if dealerHandVal == BLACKJACK {
+		round.outcome = GAME_LOST
+		return round
+	} else if dealerHandVal == BUST {
+		round.outcome = GAME_WON
+		return round
+	} else {
+		for dealer.hand.FavourableValue() <= 17 {
+			card, round.deck = round.deck.Draw()
+			dealer.DealCard(card)
+			dealerHandVal = dealer.hand.FavourableValue()
+			if (dealerHandVal > playerHandVal) && (dealerHandVal <= BLACKJACK) {
+				round.outcome = GAME_LOST
+				return round
+			}
+			if dealerHandVal >= BUST {
+				round.outcome = GAME_WON
+				return round
+			}
+		}
+		if dealerHandVal < playerHandVal {
+			round.outcome = GAME_WON
+			return round
+		}
+	}
+	return round
 }
