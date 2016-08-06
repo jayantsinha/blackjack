@@ -21,7 +21,7 @@ func TestShuffle(t *testing.T) {
 	deckShuffled := deck
 	deckNormal = CreateNewDeck()
 	deckShuffled = CreateNewDeck()
-	deckShuffled = deckShuffled.Shuffle()
+	deckShuffled.Shuffle()
 
 	if len(deckNormal) == len(deckShuffled) {
 		//Compare both decks
