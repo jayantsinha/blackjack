@@ -2,6 +2,7 @@ package main
 
 import (
 	"math/rand"
+	"time"
 )
 
 type Deck []Card
@@ -26,6 +27,7 @@ func createSuit(suit string, deck Deck) Deck {
 
 //Knuth or Fisher-Yates shuffle
 func (d *Deck) Shuffle() {
+	rand.Seed(time.Now().UnixNano() / int64(time.Millisecond))
 	deck := *d
 	for i := range deck {
 		j := rand.Intn(i + 1)
