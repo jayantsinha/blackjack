@@ -11,18 +11,16 @@ func (hand Hand) TotalValue() (actual, alternate int) {
 	return actual, alternate
 }
 
-func (hand *Hand) AddCard(card Card) {
-	h := *hand
-	h = append(h, card)
+func (hand *Hand) AddCard(card *Card) {
+	h := append(*hand, *card)
 	*hand = h
-
 }
 
 //Adjust the aces in hand in favour of the player
 //If; for example; there are 2 aces in hand,
 //then the total value should be 12 rather than 22
 //for 2 aces and a nine will total to 21
-func (hand Hand) AdjustAces() int {
+func (hand Hand) FavourableValue() int {
 	var acesInHand []Card
 	var nonAceCard []Card
 	var nonAceCardSum = 0
