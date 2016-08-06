@@ -8,9 +8,9 @@ func TestAdjustAces(t *testing.T) {
 	card1 := NewCard(SUIT_SPADES, ACE)
 	card2 := NewCard(SUIT_HEARTS, ACE)
 	card3 := NewCard(SUIT_HEARTS, NINE)
-	hand = hand.AddCard(card1)
-	hand = hand.AddCard(card2)
-	hand = hand.AddCard(card3)
+	hand.AddCard(card1)
+	hand.AddCard(card2)
+	hand.AddCard(card3)
 	handValue := hand.AdjustAces()
 	expectedValue := 21
 	if handValue != expectedValue {
@@ -22,9 +22,9 @@ func TestAdjustAces(t *testing.T) {
 	card1 = NewCard(SUIT_SPADES, NINE)
 	card2 = NewCard(SUIT_HEARTS, TEN)
 	card3 = NewCard(SUIT_HEARTS, JACK)
-	hand = hand.AddCard(card1)
-	hand = hand.AddCard(card2)
-	hand = hand.AddCard(card3)
+	hand.AddCard(card1)
+	hand.AddCard(card2)
+	hand.AddCard(card3)
 	handValue = hand.AdjustAces()
 	expectedValue = 29
 	if handValue != expectedValue {
@@ -35,8 +35,8 @@ func TestAdjustAces(t *testing.T) {
   hand = Hand{}
 	card1 = NewCard(SUIT_SPADES, ACE)
 	card2 = NewCard(SUIT_HEARTS, TEN)
-	hand = hand.AddCard(card1)
-	hand = hand.AddCard(card2)
+	hand.AddCard(card1)
+	hand.AddCard(card2)
 	handValue = hand.AdjustAces()
 	expectedValue = 21
 	if handValue != expectedValue {

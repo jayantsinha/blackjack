@@ -11,8 +11,11 @@ func (hand Hand) TotalValue() (actual, alternate int) {
 	return actual, alternate
 }
 
-func (hand Hand) AddCard(card Card) Hand {
-	return append(hand, card)
+func (hand *Hand) AddCard(card Card) {
+	h := *hand
+	h = append(h, card)
+	*hand = h
+
 }
 
 //Adjust the aces in hand in favour of the player
