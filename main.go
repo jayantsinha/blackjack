@@ -79,7 +79,7 @@ func play() {
 				case "H", "h":
 					card, round.deck = round.deck.Draw()
 					round.player.DealCard(card)
-					fmt.Println("Your card: ",card)
+					fmt.Println("Your card: ", card)
 					if round.player.hand.FavourableValue() == BLACKJACK {
 						round.outcome = GAME_BLACKJACK
 						fmt.Println(GAME_BLACKJACK)
