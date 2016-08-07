@@ -71,7 +71,7 @@ func TestHasMoreCards(t *testing.T) {
 	deck := deck
 	deck = CreateNewDeck()
 	for i := 0; i < 52; i++ {
-		card, deck = deck.Draw()
+		_, deck = deck.Draw()
 	}
 	deckHasMoreCards := deck.HasMoreCards()
 	if deckHasMoreCards {
