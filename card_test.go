@@ -13,7 +13,7 @@ func TestNewCard(t *testing.T) {
 	}
 
 	if card.face != aceCard.face {
-		t.Errorf("Card value should be %d, found %d", aceCard.face, card.face)
+		t.Errorf("Card value should be %v, found %v", aceCard.face, card.face)
 	}
 	if card.value != aceCard.value {
 		t.Errorf("Card value should be %d, found %d", aceCard.value, card.value)
@@ -22,6 +22,6 @@ func TestNewCard(t *testing.T) {
 		t.Errorf("Card value should be %d, found %d", aceCard.alternateValue, card.alternateValue)
 	}
 	if card.suit != aceCard.suit {
-		t.Errorf("Card value should be %d, found %d", aceCard.suit, card.suit)
+		t.Errorf("Card value should be %v, found %v", aceCard.suit, card.suit)
 	}
 }
