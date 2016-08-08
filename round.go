@@ -13,6 +13,7 @@ const (
 	GAME_WON              = "Game Won"
 	GAME_BLACKJACK        = "Blackjack!"
 	GAME_BUST             = "Bust!"
+	GAME_DRAW             = "Game Draw"
 )
 
 type Player struct {
@@ -35,20 +36,23 @@ type Round struct {
 func (human *Human) DealCard(card Card) {
 	p := *human
 	p.hand.AddCard(&card)
+	*human = p
 }
 
 func (dealer *Dealer) DealCard(card Card) {
 	p := *dealer
 	p.hand.AddCard(&card)
+	*dealer = p
 }
 
 //Called when player opts to Stand
-func (round Round) DealersTurn() Round {
-	dealer := round.dealer
-	player := round.player
+func (r *Round) DealersTurn() Round {
+	round := *r
+	//dealer := round.dealer
+	//player := round.player
 	card := Card{}
-	dealerHandVal := dealer.hand.FavourableValue()
-	playerHandVal := player.hand.FavourableValue()
+	dealerHandVal := round.dealer.hand.FavourableValue()
+	playerHandVal := round.player.hand.FavourableValue()
 	//Check Natural
 	if dealerHandVal == BLACKJACK {
 		round.outcome = GAME_LOST
@@ -57,10 +61,10 @@ func (round Round) DealersTurn() Round {
 		round.outcome = GAME_WON
 		return round
 	} else {
-		for dealer.hand.FavourableValue() <= 17 {
+		for round.dealer.hand.FavourableValue() <= 17 {
 			card, round.deck = round.deck.Draw()
-			dealer.DealCard(card)
-			dealerHandVal = dealer.hand.FavourableValue()
+			round.dealer.DealCard(card)
+			dealerHandVal = round.dealer.hand.FavourableValue()
 			if (dealerHandVal > playerHandVal) && (dealerHandVal <= BLACKJACK) {
 				round.outcome = GAME_LOST
 				return round
@@ -72,6 +76,9 @@ func (round Round) DealersTurn() Round {
 		}
 		if dealerHandVal < playerHandVal {
 			round.outcome = GAME_WON
+			return round
+		} else if dealerHandVal == playerHandVal {
+			round.outcome = GAME_DRAW
 			return round
 		}
 	}
