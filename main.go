@@ -50,7 +50,7 @@ func play() {
 	pHandVal := 0
 
 	for round.deck.HasMoreCards() {
-		if round.outcome == GAME_BUST || round.outcome == GAME_BLACKJACK || round.outcome == GAME_LOST || round.outcome == GAME_WON || round.outcome == "ND" {
+		if round.outcome != "" {
 			round.dealer = Dealer{}
 			round.player = Human{}
 			for i := 0; i < 2; i++ {
